@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import xawe.com.springlab.springlab.ProductNotfoundException;
 import xawe.com.springlab.springlab.model.*;
 
 @RestController
@@ -44,6 +45,7 @@ public class ProductServiceController{
 
     @RequestMapping(value="/products/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product){
+        if(!productRepo.containsKey(id)) throw new ProductNotfoundException();
         productRepo.remove(id);
         product.setid(product.getid());
         productRepo.put(product.getid(), product);
