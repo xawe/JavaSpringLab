@@ -20,6 +20,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+			<version>3.3.9</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -42,10 +47,30 @@
 	</dependencies>
 
 	<build>
+	<resources>
+		<resource>
+		<directory>src/main/resources</directory>
+		<filtering>true</filtering>
+		</resource>
+	</resources>   
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+					<manifest>
+						<mainClass>test.App</mainClass>
+						<addDefaultImplementationEntries>
+						true
+						</addDefaultImplementationEntries>
+					</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
