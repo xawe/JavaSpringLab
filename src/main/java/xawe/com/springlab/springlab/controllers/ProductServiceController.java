@@ -37,13 +37,13 @@ public class ProductServiceController{
         productRepo.put(almond.getid(), almond);
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/products/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete(@PathVariable("id") String id){
         productRepo.remove(id);
         return new ResponseEntity<>("Produto removido com sucesso", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/products/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value="/api/products/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product){
         if(!productRepo.containsKey(id)) throw new ProductNotfoundException();
         productRepo.remove(id);
@@ -52,13 +52,13 @@ public class ProductServiceController{
         return new ResponseEntity<>("Produto atualizado com sucesso", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/products", method = RequestMethod.POST)
     public ResponseEntity<Object> createProduct(@RequestBody Product product) {
         productRepo.put(product.getid(), product);
         return new ResponseEntity<>("Produto criado com sucesso", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/products")
+    @RequestMapping(value="/api/products")
     public ResponseEntity<Object> getProduct(){
         return new ResponseEntity<>(productRepo.values(), HttpStatus.OK);
     }
